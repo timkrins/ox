@@ -273,7 +273,7 @@ module Ox
           when '>'
             match = index <= match.size ? match[index + 1..-1] : []
           when '@'
-            k,v = step[3..-2].split('=')
+            k,v = step[step.index('[') + 2..step.rindex(']') - 1].split('=')
             match = match.select { |n| n.is_a?(Element) && (v == n.attributes[k.to_sym] || v == n.attributes[k]) }
           else
             raise InvalidPath.new(path)
